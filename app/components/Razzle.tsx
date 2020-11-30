@@ -106,7 +106,7 @@ class RazzleElement extends React.Component<RazzleProps, RazzleItemState> {
               hasWon: false,
               winningBottle: '',
               // eslint-disable-next-line no-restricted-globals
-              entries: isNaN(parseInt(row[3], 10)) ? 0 : parseInt(row[3], 10),
+              entries: isNaN(parseInt(row[2], 10)) ? 0 : parseInt(row[2], 10),
               rankings,
             });
           })
