@@ -13,10 +13,14 @@ export default function EntryList(props: IEntryListElementProps): JSX.Element {
   const winners = entries.filter((entry) => entry.hasWon);
   const nonWinners = entries.filter((entry) => !entry.hasWon);
   const entryWinnerElements = winners.map((item) => (
-    <EntryWinnerElement entry={item} key={item.number} />
+    <EntryWinnerElement entry={item} key={item.name + item.number} />
   ));
   const entryElements = nonWinners.map((item) => (
-    <EntryElement entry={item} bottles={bottles} key={item.number} />
+    <EntryElement
+      entry={item}
+      bottles={bottles}
+      key={item.name + item.number}
+    />
   ));
   return (
     <div>

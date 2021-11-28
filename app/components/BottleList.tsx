@@ -14,7 +14,7 @@ export default function BottleList(
   const { bottles, entries } = props;
   const winners = entries.filter((entry) => entry.hasWon);
   const claimedBottleElements = winners.map((item) => (
-    <ClaimedBottleElement winner={item} key={item.number} />
+    <ClaimedBottleElement winner={item} key={item.name + item.number} />
   ));
   const remainingBottles = bottles.filter((bottle) =>
     bottle.qtyClaimed ? bottle.qty > bottle.qtyClaimed : true

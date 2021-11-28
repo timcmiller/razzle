@@ -31,7 +31,12 @@ export default function Home(): JSX.Element {
   const razzleElements = razzles.map((item, key) => {
     const eligibleEntries = item.entries.reduce<EligibleEntry[]>(
       (eligible: EligibleEntry[], entry: Entry) => {
-        if (!winners.find((winner) => winner.number === entry.number)) {
+        if (
+          !winners.find(
+            (winner) =>
+              winner.number === entry.number && winner.name === entry.name
+          )
+        ) {
           const availableBottles = item.bottles.filter(
             (bottle) => !bottle.qtyClaimed || bottle.qty > bottle.qtyClaimed
           );

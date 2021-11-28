@@ -30,7 +30,7 @@ class EditEntryList extends React.Component<
     const { onEntriesChanged } = this.props;
     const { pendingEntries } = this.state;
     const newPendingEntries = pendingEntries.map((entry) => {
-      if (newEntry.number === entry.number) {
+      if (newEntry.number === entry.number && newEntry.name === entry.name) {
         return newEntry;
       }
       return entry;
@@ -52,13 +52,13 @@ class EditEntryList extends React.Component<
     const winners = entries.filter((entry) => entry.hasWon);
     const nonWinners = entries.filter((entry) => !entry.hasWon);
     const entryWinnerElements = winners.map((item) => (
-      <EntryWinnerElement entry={item} key={item.number} />
+      <EntryWinnerElement entry={item} key={item.number + item.name} />
     ));
     const entryElements = nonWinners.map((item) => (
       <EditEntryElement
         entry={item}
         onEntryChanged={this.onEntryChanged}
-        key={item.number}
+        key={item.number + item.name}
       />
     ));
     return (

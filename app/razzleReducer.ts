@@ -53,7 +53,10 @@ export default function razzleReducer(
       const razzleState = state.map((razzle) => {
         if (razzle.id === action.payload.razzleId) {
           const newEntries = razzle.entries.map((entry) => {
-            if (entry.number === action.payload.entry.number) {
+            if (
+              entry.number === action.payload.entry.number &&
+              entry.name === action.payload.entry.name
+            ) {
               return {
                 ...entry,
                 hasWon: true,

@@ -59,7 +59,7 @@ class EditBottleElement extends React.Component<IEditBottleElementProps> {
             color="primary"
             defaultValue={name}
             onChange={this.handleNameChange}
-            style={{ margin: '20px 0px 20px 0px;' }}
+            style={{ margin: '20px 0px 20px 0px' }}
           />
           <TextField
             id="outlined-number"
