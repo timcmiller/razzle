@@ -94,6 +94,7 @@ export default function razzleReducer(
         }
         return razzle;
       });
+      store.set('razzles', importEntriesState);
       return importEntriesState;
     default:
       return state;

@@ -5,6 +5,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 interface IRazzleButtonGroupProps {
   isEdit: boolean;
   setIsEdit: () => void;
+  onImportRankings: () => void;
   onImportEntries: () => void;
   onRazzle: () => void;
   onRazzleDelete: () => void;
@@ -16,6 +17,7 @@ export default function RazzleButtonGroup(
   const {
     isEdit,
     setIsEdit,
+    onImportRankings,
     onImportEntries,
     onRazzle,
     onRazzleDelete,
@@ -34,10 +36,19 @@ export default function RazzleButtonGroup(
       <Button
         variant="contained"
         color="primary"
-        onClick={isEdit ? onImportEntries : onRazzle}
+        onClick={isEdit ? onImportRankings : onRazzle}
       >
-        {isEdit ? 'Import Entries' : 'Razzle'}
+        {isEdit ? 'Import Rankings' : 'Razzle'}
       </Button>
+      {!isEdit ? null : (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={isEdit ? onImportEntries : onRazzle}
+        >
+          Import Entries
+        </Button>
+      )}
       {!isEdit ? null : (
         <Button
           variant="contained"

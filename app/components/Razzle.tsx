@@ -49,6 +49,7 @@ class RazzleElement extends React.Component<RazzleProps, RazzleItemState> {
     this.onRazzleDelete = this.onRazzleDelete.bind(this);
     this.onRazzle = this.onRazzle.bind(this);
     this.onImportEntries = this.onImportEntries.bind(this);
+    this.onImportRankings = this.onImportRankings.bind(this);
     this.handleRazzleNameChange = this.handleRazzleNameChange.bind(this);
     this.handleTabChange = this.handleTabChange.bind(this);
     this.onEntriesChanged = this.onEntriesChanged.bind(this);
@@ -71,11 +72,66 @@ class RazzleElement extends React.Component<RazzleProps, RazzleItemState> {
     const { remote } = require('electron');
     const { isEdit } = this.state;
     const { razzle, dispatch } = this.props;
-    const { id } = razzle;
+    const { id, entries } = razzle;
     const options = {
       filters: [{ name: 'SpreadSheet', extensions: ['csv'] }],
       properties: ['openFile'],
       message: 'Select .csv file to import Entries',
+    };
+    const submittedEntries: Entry[] = [];
+    // eslint-disable-next-line promise/catch-or-return
+    remote.dialog
+      .showOpenDialog(remote.getCurrentWindow(), options)
+      // eslint-disable-next-line promise/always-return
+      .then((data) => {
+        fs.createReadStream(data.filePaths[0])
+          .pipe(csv())
+          .on('data', (row: string[]) => {
+            if (row[0].toLowerCase() === 'name') return;
+            submittedEntries.push({
+              name: row[0],
+              number: row[1],
+              hasWon: false,
+              winningBottle: '',
+              // eslint-disable-next-line no-restricted-globals
+              entries: isNaN(parseInt(row[2], 10)) ? 0 : parseInt(row[2], 10),
+              rankings: [],
+            });
+          })
+          .on('end', () => {
+            const newEntries = entries.map((entry) => {
+              const submittedEntry = submittedEntries.find(
+                (x) => x.number === entry.number && x.name === entry.name
+              );
+              const newEntry = {
+                ...entry,
+              };
+              if (submittedEntry) {
+                newEntry.entries = submittedEntry.entries;
+              }
+              return newEntry;
+            });
+            dispatch(
+              importEntries({
+                razzleId: id,
+                entries: newEntries,
+              })
+            );
+            this.setState({ isEdit: !isEdit });
+          });
+      });
+  }
+
+  onImportRankings() {
+    // eslint-disable-next-line global-require
+    const { remote } = require('electron');
+    const { isEdit } = this.state;
+    const { razzle, dispatch } = this.props;
+    const { id } = razzle;
+    const options = {
+      filters: [{ name: 'SpreadSheet', extensions: ['csv'] }],
+      properties: ['openFile'],
+      message: 'Select .csv file to import Rankings',
     };
     const entries: Entry[] = [];
     // eslint-disable-next-line promise/catch-or-return
@@ -254,6 +310,7 @@ class RazzleElement extends React.Component<RazzleProps, RazzleItemState> {
           <RazzleButtonGroup
             isEdit={isEdit}
             setIsEdit={this.setIsEdit}
+            onImportRankings={this.onImportRankings}
             onImportEntries={this.onImportEntries}
             onRazzle={this.onRazzle}
             onRazzleDelete={this.onRazzleDelete}
