@@ -100,17 +100,37 @@ class RazzleElement extends React.Component<RazzleProps, RazzleItemState> {
           })
           .on('end', () => {
             const newEntries = entries.map((entry) => {
-              const submittedEntry = submittedEntries.find(
-                (x) => x.number === entry.number && x.name === entry.name
-              );
+              const index = submittedEntries.findIndex((x) => {
+                const currentNumber = entry.number.replace(/[^0-9]/g, '');
+                const newNumber = x.number.replace(/[^0-9]/g, '');
+                return newNumber === currentNumber && x.name === entry.name;
+              });
               const newEntry = {
                 ...entry,
               };
-              if (submittedEntry) {
-                newEntry.entries = submittedEntry.entries;
+              if (index > -1) {
+                newEntry.entries = submittedEntries[index].entries;
+                submittedEntries.splice(index, 1);
               }
               return newEntry;
             });
+
+            if (submittedEntries.length !== 0) {
+              let text = '';
+              submittedEntries.forEach((e) => {
+                text += `${e.name} ${e.number}\n`;
+              });
+              const orphanOptions = {
+                buttons: ['Ok'],
+                message: `Found Entries without matching rankings:\n${text}`,
+              };
+
+              remote.dialog.showMessageBox(
+                remote.getCurrentWindow(),
+                orphanOptions
+              );
+            }
+
             dispatch(
               importEntries({
                 razzleId: id,
