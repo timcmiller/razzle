@@ -307,6 +307,7 @@ class RazzleElement extends React.Component<RazzleProps, RazzleItemState> {
           <Tabs
             value={tabValue}
             onChange={this.handleTabChange}
+            centered
             style={{ display: 'flex' }}
           >
             <Tab label="Bottles" value="1" />

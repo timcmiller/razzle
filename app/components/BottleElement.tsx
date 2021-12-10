@@ -8,7 +8,13 @@ interface IBottleElementProps {
 export default function BottleElement(props: IBottleElementProps): JSX.Element {
   const { bottle } = props;
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        padding: '5px',
+      }}
+    >
       <span>{bottle.name}</span>
       <span>
         {bottle.qtyClaimed ? bottle.qty - bottle.qtyClaimed : bottle.qty}

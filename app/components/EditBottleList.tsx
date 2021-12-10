@@ -143,14 +143,16 @@ class EditBottleList extends React.Component<
     return (
       <div>
         {editBottles}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'baseline',
-          }}
-        >
-          <form noValidate autoComplete="off">
+        <div>
+          <form
+            noValidate
+            autoComplete="off"
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
             <TextField
               id="standard-required"
               label="Standard"

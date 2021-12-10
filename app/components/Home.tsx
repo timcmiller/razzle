@@ -67,18 +67,24 @@ export default function Home(): JSX.Element {
       []
     );
     return (
-      <RazzleElement
-        key={item.id}
-        razzle={item}
-        dispatch={dispatch}
-        index={key}
-        eligibleEntries={eligibleEntries}
-      />
+      <Grid key={item.id} item xs={12}>
+        <RazzleElement
+          razzle={item}
+          dispatch={dispatch}
+          index={key}
+          eligibleEntries={eligibleEntries}
+        />
+      </Grid>
     );
   });
   return (
     <div className={styles.container} data-tid="container">
-      <Grid container spacing={3} direction="row">
+      <img
+        src="img/logo_transparent.png"
+        alt="logo"
+        style={{ position: 'absolute', left: '5px', top: '5px' }}
+      />
+      <Grid container spacing={3} alignItems="center" direction="row">
         {razzleElements}
         <CreateNewRaffle />
       </Grid>

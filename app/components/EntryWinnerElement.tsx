@@ -10,7 +10,13 @@ export default function EntryWinnerElement(
 ): JSX.Element {
   const { entry } = props;
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        padding: '5px',
+      }}
+    >
       <span>{entry.name}</span>
       <span>{entry.winningBottle}</span>
     </div>

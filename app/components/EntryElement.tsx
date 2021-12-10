@@ -23,7 +23,13 @@ export default function EntryElement(props: IEntryElementProps): JSX.Element {
   const id = open ? 'simple-popover' : undefined;
   const { entry, bottles } = props;
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        padding: '15px 5px',
+      }}
+    >
       <span style={{ margin: 'auto auto auto 0px' }}>{entry.name}</span>
       <span style={{ margin: 'auto' }}>{entry.entries}</span>
       <Button aria-describedby={id} variant="contained" onClick={handleClick}>

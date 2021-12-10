@@ -63,9 +63,13 @@ class EditEntryList extends React.Component<
     ));
     return (
       <div>
-        <div>{entryWinnerElements.length === 0 ? null : 'Winners'}</div>
+        <div style={{ margin: '10px' }}>
+          {entryWinnerElements.length === 0 ? null : 'Winners'}
+        </div>
         {entryWinnerElements}
-        <div>{entryElements.length === 0 ? null : 'Entries'}</div>
+        <div style={{ margin: '10px' }}>
+          {entryElements.length === 0 ? null : 'Entries'}
+        </div>
         {entryElements}
       </div>
     );

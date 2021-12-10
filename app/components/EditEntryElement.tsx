@@ -33,10 +33,11 @@ class EditEntryElement extends React.Component<IEditEntryElementProps> {
         style={{
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'baseline',
+          alignItems: 'center',
+          padding: '5px',
         }}
       >
-        <span style={{ margin: 'auto' }}>{entry.name}</span>
+        <span>{entry.name}</span>
         <form noValidate autoComplete="off">
           <TextField
             id="outlined-number"

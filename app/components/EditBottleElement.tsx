@@ -45,14 +45,16 @@ class EditBottleElement extends React.Component<IEditBottleElementProps> {
     const { bottle } = this.props;
     const { name, qty } = bottle;
     return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'baseline',
-        }}
-      >
-        <form noValidate autoComplete="off">
+      <div>
+        <form
+          noValidate
+          autoComplete="off"
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'baseline',
+          }}
+        >
           <TextField
             id="standard-required"
             label="Standard"

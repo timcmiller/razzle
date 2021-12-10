@@ -10,7 +10,7 @@ export default function RankingItem(props: IRankingItemProps): JSX.Element {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
       <span>{bottleName}</span>
-      <span>{rank}</span>
+      <span>{rank || 'N/A'}</span>
     </div>
   );
 }

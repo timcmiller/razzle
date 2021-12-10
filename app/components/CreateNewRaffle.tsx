@@ -9,7 +9,7 @@ export default function CreateNewRaffle(): JSX.Element {
     dispatch(addRazzle());
   };
   return (
-    <Grid item>
+    <Grid item xs={12}>
       <Button
         variant="contained"
         color="primary"
